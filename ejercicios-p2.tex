@@ -1,0 +1,200 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,amsthm,xcolor,amssymb,mathtools}
+\pagenumbering{gobble}
+\usepackage{geometry}\geometry{margin=1in}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{eufrak}
+\usepackage{tikz-cd}
+\usepackage{tcolorbox}
+\usepackage{enumitem}% http://ctan.org/pkg/enumitem
+\setlist[itemize]{noitemsep, topsep=0pt}
+\usepackage{verbatim} %Comentar una sección a la vez, más cómodo que usar %
+\usepackage{sectsty}
+
+
+
+\colorlet{chulo}{blue!70!purple}
+\colorlet{rojo}{red!65!black}
+
+
+
+
+\subsectionfont{\color{chulo!60!black} }
+\sectionfont{\color{chulo!30!black} }
+
+
+%Tipografía fancy
+%\usepackage{mathpazo}
+\usepackage{tgtermes}
+
+%%%%%%%%%%%%%  Teoremas  %%%%%%%%%%%%%%%%%
+
+\theoremstyle{plain}
+\newtheorem{teo}{Teorema}
+\newtheorem{propo}{Proposición}
+\newtheorem{lema}[teo]{Lema}
+\newtheorem*{ej}{Ejercicio}
+
+
+%Definiciones
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+\newtheorem*{sol}{Solución}
+\newtheorem*{lemm}{Lema}
+
+% Observaciones
+\theoremstyle{remark}
+\newtheorem{obs}{Observación}
+
+%Para poner una afirmación.
+\newenvironment{claim}[1]{\par\noindent\underline{Afirmación:}\space#1}{}
+\newcommand\coker{\text{coker} \hspace{0.1cm} \phi}
+\newcommand\im{\text{im} \hspace{0.1cm} \phi}
+\newcommand\NN{\mathbb{N}}
+\newcommand\VV{\mathbb{V}}
+\newcommand\WW{\mathbb{W}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\B{\mathscr{B}}
+\newcommand\A{\mathscr{A}}
+\newcommand\G{\mathscr{G}}
+\newcommand\X{\mathfrak{X}}
+\newcommand\g{\mathfrak{g}}
+\newcommand{\Cay}{\text{{Cay}}}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\ip{\langle}{\rangle}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\Diff}{Diff}
+\let\O\relax
+\DeclareMathOperator{\O}{O}
+\DeclareMathOperator{\U}{U}
+\newcommand\eps{\varepsilon}
+\newcommand\ol{\overline}
+\newcommand\fder[2][]{\frac{\partial^{#1}}{\partial #2}}
+\newcommand\rder[2]{\frac{\partial{#1}}{\partial #2}}
+\newcommand\dd{\mathrm{d}}
+\newcommand{\red}{\textcolor{red}}
+\newcommand\smatrix[1]{\left(\begin{smallmatrix}#1\end{smallmatrix}\right)}
+
+%opening
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Primer entrega de teoría geométrica de grupos.} % Left Header
+\rhead{\thepage} % Right Header
+
+\usepackage{subfiles} % Best loaded last in the preamble
+
+\title{\color{red!55!black} Segunda entrega de teoría geométrica de grupos.}
+\author{Leopoldo Lerena.}
+\date{2do Cuatrimestre de 2021.}
+\begin{document}
+	\maketitle
+	
+\begin{tcolorbox}[colback=teal!25!white,colframe=teal!75!black]
+	\begin{ej}[6]
+	Los árboles métricos $T_n$ y $T_m$ son cuasisométricos para $n,m \ge 3$.
+	\end{ej}
+\end{tcolorbox}	
+
+\begin{sol}
+	El argumento consiste en ver que estos grafos son isomorfos a los grafos de Cayley respectivos de estos grupos libres y luego ver que ellos son isométricos a $F_2$ para así llegar a lo que queríamos ver.
+	
+	Primero notemos que si tenemos la presentación $\pi=\langle a_1,a_2, \dots, a_n \rangle$ usual del grupo libre $F_n$ entonces $\Cay(F_n, \pi) \simeq T_n$. Esto se puede ver directamente dado que ambos grafos son isomorfos por medio de mandar la raíz de $T_n$ al correspondiente vértice de $1_{F_n}$ en el grafo de Cayley y eligiendo para cada una de las $n$ aristas una de las $n$ aristas diferentes del grafo de Cayley ya que lo tomamos con la presentación usual y como tal tiene $n$ generadores. Es claro que son isomorfos como grafos pero a su vez es una isometría dado que $T_n$ es tal que las aristas son homeomorfas con $[0,1]$ y este es el caso también de los grafos de Cayley vistos como espacios métricos. De esta manera vemos que ambos son cuasisométricos en particular.
+	
+	
+	Por otro lado, como \emph{todo grupo libre $F_n$ es un subgrupo de índice finito en $F_2$.} En particular obtenemos que como todo subgrupo de índice finito es cuasisométrico con el grupo debe ser que $F_n \sim_{q.i} F_2$ para todo $n \ge 3$. Así finalmente obtenemos por la transitividad de la relación de cuasisometría que $T_n \sim_{q.i} T_m$ tal como queríamos ver.
+\end{sol}
+	
+
+\newpage
+	
+	
+	
+\bigskip
+\begin{tcolorbox}[colback=teal!25!white,colframe=teal!75!black]
+	\begin{ej}
+		El producto libre de grupos hiperbólicos es hiperbólico.
+	\end{ej}	
+\end{tcolorbox}
+\medskip	
+	
+\begin{sol}[1] Vamos a resolverlo usando la definición de $\delta$-slim para triángulos geodésicos. 
+	
+Primero recordemos algunos resultados importantes del producto libre de grupos. Sean los grupos $G_1, G_2$ tales que tienen generadores $S_1,S_2$ respectivamente. En tal caso el producto libre de estos dos grupos tiene como generadores a $S_1 \cup S_2$. Consideremos que ambos grupos son $\delta_1, \delta_2$-slim respectivamente.
+{\small \paragraph{{\small Forma normal del producto libre.}}
+	Cada $h \in G_1  * G_2$ lo podemos escribir de manera única como $$h= a_1a_2a_3 \dots a_n$$ donde $a_i \in G_i$ de manera alternante. La multiplicación de elementos en forma normal se da por la concatenación de los elementos. 
+}
+\medskip
+
+Consideremos el grafo de Cayley de $G_1 * G_2$ con los generadores $S_1 \cup S_2$. Sea el triángulo geodésico tal que sus vértices son los elementos $1,g,h \in G_1 * G_2$ ---sin pérdida de generalidad asumimos que uno de estos vértices es $1$ pues todo triángulo geodésico lo podemos llevar isométricamente a esta forma---. Debemos ver que los segmentos geodésicos están un algún $\delta$ vecindario de los otros dos segmentos geodésicos del triángulo. Para esto afirmo que el siguiente $\delta = \max \{\delta_1, \delta_2\}$ nos sirve. Lo que vamos a hacer es partir el triángulo geodésico en triángulos geodésicos más pequeños que sea isométricos con triángulos en el grafo de Cayley de los grupos que estamos tomandoles el producto libre. 
+
+Veamos como son las geodésicas en este grafo de Cayley del producto libre. Sea $h$ como antes luego si $a_1 \in G_1$ sabemos que se escribe como $s^1_1 \dots s^1_{n_1}$ donde $s^1_i \in S_1$ y de manera análoga para los otros $a_j$ con $j \le n$. Entonces si miramos los segmentos geodésicos en los siguientes casos que tengamos $h=a_1 \dots a_k$ y $g=b_1 \dots b_k$ donde $a_k, b_k \in G_i$ para el mismo factor como el producto es la concatenación lo que notamos es que debe existir una geodésica con elementos $s^i$ que unan los vértices de $a_k$ con los de $b_k$. De esta manera podemos descomponer en triangulos que son isométricos a los triángulos del grafo de Cayley de $G_i$ con los generadores $S_i$. En los otros casos no hace falta descomponer en triangulos dado que de por sí como la multiplicación es la concatenación los triangulos nos quedan degenerados entonces en particular son $0-$slim. De esta manera vimos que todo triángulo geodésico es $\delta$-slim por lo tanto el producto libre de grupos hiperbólicos es hiperbólico. 
+	
+\end{sol}
+\bigskip
+\begin{sol}[2]
+	Vamos a resolverlo dando el algoritmo de Dehn. Otra de las equivalencias para ser un grupo hiperbólico es que exista un algoritmo de Dehn para decidir si cierta palabra en los generadores del grupo representa la identidad y esto es lo mismo que exista una presentación de Dehn. 
+	
+	En este caso sale bastante directo armarnos la presentación del producto libre a partir de las otras dos presentaciones. En particular recordemos que los generadores del producto libre son los dos conjuntos de generadores de los grupos y como relaciones podemos tomar la unión de ambas relaciones. Esta presentación es de Dehn porque cualquier elemento del producto libre es un producto de elementos en ambos grupos de manera alternante -agrupando si es necesario- y con las relaciones que ya sabemos cumplen la condición de la presentación de Dehn estas siguen valiendo.
+\end{sol}	
+	
+\newpage
+\begin{tcolorbox}[colback=teal!25!white,colframe=teal!75!black]
+	\begin{ej}
+		El grupo $SL_2 (\ZZ)$ es hiperbólico.
+	\end{ej}	
+\end{tcolorbox}
+\medskip	
+
+\emph{En este ejercicio utilizo algunos resultados básicos de Bass Serre y de la forma de este grupo -que no demuestro- para llegar a la conclusión. No se me ocurrió una forma más elemental.}
+
+
+\begin{sol}[1]
+Veamos que es hiperbólico pero esta vez usando que es un grupo virtualmente libre.
+
+Para eso primero veamos que los grupos virtualmente libres son grupos hiperbólicos. Recordemos que un grupo virtualmente libre es tal que tiene un subgrupo de índice finito que es libre. Sea $G$ un grupo virtualmente libre y $H$ el subgrupo libre. Al ser $H$ un grupo libre este es hiperbólico. Sea $X$ algún grafo de Cayley de $G$ luego notemos que $H$ actúa de manera propiamente discontinua sobre este grafo porque es un subgrupo ---en particular estamos mirando la restricción de la acción de $G$ a $H$---. La acción es cocompacta porque justamente el cociente es finito. Por lo tanto usando Milnor Schwarz obtenemos que $H$ es cuasi isométrico con $G$ y dado que la hiperbolicidad es un invariante por cuasisometrías obtenemos así el resultado.
+
+Veamos ahora que $SL_2(\ZZ)$ es un grupo virtualmente libre. Recordemos que $SL_2(\ZZ)$ actúa sobre el árbol de Bass Serre tal que los estabilizadores de los vértices respectivamente son $\ZZ / 4 \ZZ$ y $\ZZ /6 \ZZ$. Por otro lado podemos ver que la abelianización de $SL_2(\ZZ)$ es un grupo finito  dado que el mapa $\ZZ/4\ZZ * \ZZ/6\ZZ \to \ZZ / 6\ZZ \times \ZZ / 4\ZZ$ tiene como núcleo a justamente el conmutador del grupo $PSL_2(\ZZ) = \ZZ / 2 \ZZ * \ZZ / 3 \ZZ $. Esto es que su abelianizado es $\ZZ / 3\ZZ \times \ZZ / 2\ZZ = \ZZ / 6 \ZZ$.
+
+ Como las transformaciones proyectivas son un cociente de $SL_2(\ZZ)$, el conmutador debe ser tal que su índice es finito usando que la proyección $\pi:SL_2(\ZZ) \to PSL_2(\ZZ)$ es sobreyectiva por lo tanto 
+ \begin{equation*}
+ 	\pi[SL_2(\ZZ),SL_2(\ZZ)] = [PSL_2(\ZZ),PSL_2(\ZZ)]
+ \end{equation*}
+  por lo que $SL_2(\ZZ) / [SL_2(\ZZ), SL_2(\ZZ)]$ tiene orden finito. Usando el \emph{teorema del isomorfismo} obtenemos que el abelianizado de $SL_2(\ZZ)$ es $\ZZ/4\ZZ \times \ZZ/3\ZZ \simeq \ZZ / 12\ZZ$.  
+  De esta manera nos conseguimos un subgrupo de índice finito. 
+  
+  Para ver que es libre vamos a usar el \emph{teorema de Serre} viendo que actúa libremente sobre un árbol. Consideramos el árbol de Bass Serre del grupo y notamos que ninguno de los dos estabilizadores están en el conmutador dado que se inyectan en el abelianizado. Esto es que si alguno de los conjugados de $\ZZ / 4\ZZ$ está en el conmutador luego por la proyección debería parar a la identidad del abelianizado y esto es una contradicción porque existe un $\ZZ / 4\ZZ$ en el abelianizado. Si lo levantaramos obtendríamos $\ZZ / 4\ZZ [SL_2(\ZZ),SL_2(\ZZ)] \le SL_2(\ZZ)$ y este contendría a un conjugado de $\ZZ / 4\ZZ$ y esto termina el argumento porque este conjugado del cíclico de orden 4 no puede ser un conjugado del que está en el conmutador.
+  \footnote{Acá estoy usando que todos los estabilizadores son conjugados en un producto amalgamado porque justamente representan estabilizadores de vértices de un grafo en el cual el grupo actua transitivamente.}
+  Concluímos así que el conmutador no interseca a los estabilizadores de las vértices por lo tanto actúa libremente sobre el árbol de Bass Serre. Finalmente esto nos dice que $H$ es un subgrupo libre concluyendo que $SL_2(\ZZ)$ es virtualmente libre y por este motivo es hiperbólico. 
+ 
+\end{sol}	
+	
+	
+\begin{sol}[2]
+	Para ver que es hiperbólico podemos hacer actuar al grupo de manera geométrica en algún espacio métrico hiperbólico. 
+	
+	Sea el árbol de Bass Serre de $SL_2(\ZZ)$  \footnote{Este es el grafo de Farey.} tal que lo podemos ver como un grafo dentro del espacio hiperbólico. Esto se debe a que su realización geométrica la podemos ver en el espacio hiperbólico dado que $SL_2(\ZZ)$ actúa en $\CC$ y podemos restringir la acción al hemisferio superior. Como tal es un espacio métrico hiperbólico con la distancia heredada como subespacio y esto nos dice que al ser la acción de $SL_2(\ZZ)$ sin inversiones y transitiva luego es una acción cocompacta sobre este grafo. Para ver que es propiamente discontinua usamos que justamente los estabilizadores de los puntos son finitos por la construcción del grafo. En particular los estabilizadores de los vértices son $\ZZ / 6\ZZ$ o $\ZZ / 4\ZZ$ dependiendo el vértice considerado y de las aristas son $\ZZ/ 2\ZZ$ por la construcción de Bass Serre. Por medio del \emph{teorema de Schwarz-Milnor} obtenemos que el grupo es hiperbólico dado que actúa de manera geométrica en un espacio métrico hiperbólico.
+\end{sol}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+\end{document}

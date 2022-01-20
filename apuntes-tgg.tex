@@ -1,0 +1,128 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,amsthm,xcolor,amssymb,mathtools}
+\pagenumbering{gobble}
+\usepackage{geometry}\geometry{margin=1in}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{eufrak}
+\usepackage{tikz-cd}
+\usepackage{tcolorbox}
+\usepackage{enumitem}% http://ctan.org/pkg/enumitem
+\setlist[itemize]{noitemsep, topsep=0pt}
+\usepackage{verbatim} %Comentar una sección a la vez, más cómodo que usar %
+\usepackage{sectsty}
+
+\colorlet{chulo}{blue!70!purple}
+\colorlet{rojo}{red!65!black}
+
+
+\subsectionfont{\color{chulo!60!black} }
+\sectionfont{\color{chulo!30!black} }
+
+
+%Tipografía fancy
+%\usepackage{mathpazo}
+\usepackage{tgtermes}
+
+%%%%%%%%%%%%%  Teoremas  %%%%%%%%%%%%%%%%%
+
+\theoremstyle{plain}
+\newtheorem{teo}{Teorema}
+\newtheorem{propo}{Proposición}
+\newtheorem{lema}[teo]{Lema}
+\newtheorem*{ej}{Ejercicio}
+
+
+%Definiciones
+\theoremstyle{definition}
+\newtheorem*{deff}{Definición}
+\newtheorem*{sol}{Solución}
+\newtheorem*{lemm}{Lema}
+
+% Observaciones
+\theoremstyle{remark}
+\newtheorem{obs}{Observación}
+
+%Para poner una afirmación.
+\newenvironment{claim}[1]{\par\noindent\underline{Afirmación:}\space#1}{}
+\newcommand\coker{\text{coker} \hspace{0.1cm} \phi}
+\newcommand\im{\text{im} \hspace{0.1cm} \phi}
+\newcommand\fg{finitamente generado }
+\newcommand\NN{\mathbb{N}}
+\newcommand\VV{\mathbb{V}}
+\newcommand\WW{\mathbb{W}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\B{\mathscr{B}}
+\newcommand\A{\mathscr{A}}
+\newcommand\G{\mathscr{G}}
+\newcommand\X{\mathfrak{X}}
+\newcommand\g{\mathfrak{g}}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\ip{\langle}{\rangle}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\Diff}{Diff}
+\let\O\relax
+\DeclareMathOperator{\O}{O}
+\DeclareMathOperator{\U}{U}
+\newcommand\eps{\varepsilon}
+\newcommand\ol{\overline}
+\newcommand\fder[2][]{\frac{\partial^{#1}}{\partial #2}}
+\newcommand\rder[2]{\frac{\partial{#1}}{\partial #2}}
+\newcommand\dd{\mathrm{d}}
+\newcommand{\red}{\textcolor{red}}
+\newcommand\smatrix[1]{\left(\begin{smallmatrix}#1\end{smallmatrix}\right)}
+
+%opening
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Teoría geométrica de grupos.} % Left Header
+\rhead{\thepage} % Right Header
+
+\usepackage{subfiles} % Best loaded last in the preamble
+
+\title{\color{red!55!black} Teoría geométrica de grupos.}
+\author{Leopoldo Lerena.}
+\date{2do Cuatrimestre de 2021.}
+
+\begin{document}
+\maketitle
+\section{Crecimiento de grupos.}
+Sea $G$ un grupo nilpotente \fg nos gustaría entender cuál es su función de crecimiento. Un grupo nilpotente de \emph{clase} $k$ es tal que $C^{k+1} G = 1$. Para eso recordemos estas definiciones. 
+\begin{deff}
+	La \emph{dimensión homogenea} de un grupo nilpotente de rango $k$ es el siguiente número natural,
+\begin{equation*}
+	d = \sum_{i=0}^{k} i \ rg(C^i G/C^{i+1}G).
+\end{equation*}
+\end{deff}
+
+En cierta manera este número es como una característica de Euler para un grupo nilpotente. El teorema importante es el siguiente,
+
+
+\medskip
+\begin{teo}[Bass-Guivar'ch]
+	$G$ nilpotente y \fg con dimensión $d$ luego resulta que $\beta_G  \sim X^d$.
+\end{teo}
+\begin{proof}[Demo 1, versión más algebraica]
+	La idea es hacer inducción en la clase del grupo nilpotente. Para eso notemos lo siguiente.
+	\begin{itemize}
+		\item \emph{Caso base.} Esto sale facilmente porque en tal caso es un grupo abeliano y como tal tiene que ser $\ZZ^d$ más la parte de torsión finita pero esto justamente nos dice que $\beta_G \sim x^d$. 
+		\item \emph{Caso $k-1 \implies k$}. Veamos de construirnos algún grupo tal que tenga clase menor que $k$. Para eso lo natural es usar que todo los cocientes de grupos nilpotentes son nilpotentes con clase estrictamente menor. Consideremos el siguiente subgrupo $H=C^k G$ tal que el grupo $G/H$ es nilpotente de clase $k-1$ y tiene dimensión $d_1 = d - km_k$. 
+		
+		Notemos que si el grupo $H$ es finito en tal caso como $m_k = rg \  H$ resulta que nos da exactamente $m_k=0$. Equivalentemente esto nos dice que $d_1=d$. Por la hipótesis inductiva resulta que $\beta_{G/H} \sim x^d$ y por el resultado de la práctica que $G/H \underset{q.i}{\sim} G$ concluímos este caso.
+		
+		Veamos el caso que el grupo $H$ es infinito. Para eso debemos verificar que valen las dos cotas como funciones cuasidominadas una a la otra.
+	\end{itemize}
+\end{proof}
+
+
+
+ 
+\end{document}

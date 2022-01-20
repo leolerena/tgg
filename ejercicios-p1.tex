@@ -1,0 +1,321 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,amsthm,xcolor,amssymb,mathtools}
+\pagenumbering{gobble}
+\usepackage{geometry}\geometry{margin=1in}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{eufrak}
+\usepackage{tikz-cd}
+\usepackage{tcolorbox}
+\usepackage{enumitem}% http://ctan.org/pkg/enumitem
+\setlist[itemize]{noitemsep, topsep=0pt}
+\usepackage{verbatim} %Comentar una sección a la vez, más cómodo que usar %
+\usepackage{sectsty}
+
+
+
+\colorlet{chulo}{blue!70!purple}
+\colorlet{rojo}{red!65!black}
+
+
+
+
+\subsectionfont{\color{chulo!60!black} }
+\sectionfont{\color{chulo!30!black} }
+
+
+%Tipografía fancy
+%\usepackage{mathpazo}
+\usepackage{tgtermes}
+
+%%%%%%%%%%%%%  Teoremas  %%%%%%%%%%%%%%%%%
+
+\theoremstyle{plain}
+\newtheorem{teo}{Teorema}
+\newtheorem{propo}{Proposición}
+\newtheorem{lema}[teo]{Lema}
+\newtheorem*{ej}{Ejercicio}
+
+
+%Definiciones
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+\newtheorem*{sol}{Solución}
+\newtheorem*{lemm}{Lema}
+
+% Observaciones
+\theoremstyle{remark}
+\newtheorem{obs}{Observación}
+
+%Para poner una afirmación.
+\newenvironment{claim}[1]{\par\noindent\underline{Afirmación:}\space#1}{}
+\newcommand\coker{\text{coker} \hspace{0.1cm} \phi}
+\newcommand\im{\text{im} \hspace{0.1cm} \phi}
+\newcommand\NN{\mathbb{N}}
+\newcommand\VV{\mathbb{V}}
+\newcommand\WW{\mathbb{W}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\B{\mathscr{B}}
+\newcommand\A{\mathscr{A}}
+\newcommand\G{\mathscr{G}}
+\newcommand\X{\mathfrak{X}}
+\newcommand\g{\mathfrak{g}}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\ip{\langle}{\rangle}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\Diff}{Diff}
+\let\O\relax
+\DeclareMathOperator{\O}{O}
+\DeclareMathOperator{\U}{U}
+\newcommand\eps{\varepsilon}
+\newcommand\ol{\overline}
+\newcommand\fder[2][]{\frac{\partial^{#1}}{\partial #2}}
+\newcommand\rder[2]{\frac{\partial{#1}}{\partial #2}}
+\newcommand\dd{\mathrm{d}}
+\newcommand{\red}{\textcolor{red}}
+\newcommand\smatrix[1]{\left(\begin{smallmatrix}#1\end{smallmatrix}\right)}
+
+%opening
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Primer entrega de teoría geométrica de grupos.} % Left Header
+\rhead{\thepage} % Right Header
+
+\usepackage{subfiles} % Best loaded last in the preamble
+
+\title{\color{red!55!black} Primer entrega de teoría geométrica de grupos.}
+\author{Leopoldo Lerena.}
+\date{2do Cuatrimestre de 2021.}
+
+\begin{document}
+\maketitle
+Los siguientes lemas serán de utilidad en la solución del ejercicio.
+\begin{lema}\label{fgsiipropio}
+	Sea $G$ un grupo. Sea $S$ su conjunto de generadores. La métrica $d_S$ en $G$ es \textit{propia} si y solo si $S$ es finito.
+\end{lema}
+\begin{proof}
+	Si suponemos que la métrica es propia, esto quiere decir que todas las bolas de radio finito tienen finitos elementos, entonces en particular la bola centrada en $1$ de radio $1$,
+	\[
+	B_1(1) = \{g | d(g,1)=1\}
+	\]
+	que está formada por los generadores $s \in S$ resulta ser finita. Esto nos dice que es finitamente generado.
+	
+	\medskip
+	
+	En cambio si suponemos que es finitamente generado, cualquier bola $B_r(g)$ como conjunto tiene una sobreyección,
+	\[
+	F: s_1 \dots s_r \in (S \cup S^{-1})^{r} \mapsto gs_1 \dots s_r \in B_r(g)
+	\]
+	donde $(S \cup S^{-1})^{r}$ es un conjunto finito dado que $S$ lo es. Esto prueba que toda bola de radio finito es finita, por lo que la métrica es propia.
+\end{proof}
+\bigskip
+\begin{lema}\label{coro-svarc-milnor}[Práctica 1 - ejercicio 17]
+	Sea $G$ un grupo finitamente generado, $H$ un subgrupo de índice finito, luego resulta que $H$ es finitamente generado y es quasi-isométrico a $G$.
+\end{lema}
+\begin{proof}
+	Este resultado es un corolario del teorema de Svarc-Milnor. 
+	
+	Dado que $G$ al ser un grupo finitamente presentado resulta ser un espacio métrico de longitud, debemos ver que la acción de $H$ en $G$ por traslación a izquierda es geométrica. Se trata de una acción cocompacta dado que el cociente es finito por hipótesis y por lo tanto es compacto. A su vez la acción de $H$ es por isometrías dado que si $d(g,g')=n$, esto equivale a que
+	\[
+	g = g' s_1 \dots s_n
+	\]
+	para $\{s_i\}_i$ generadores de $G$, luego 
+	\[
+	hg = hg' s_1 \dots s_n.
+	\]
+	Esto nos dice que $d(hg,hg')=n$ para cualquier $h \in H$. Para finalizar de chequear las hipotesis debemos ver que la acción es propia. Para eso sea una bola $B_r(g)$ que es finita dado que el grupo es finitamente generado usando el resultado \ref{fgsiipropio}. En este caso como la acción es por isometrías resulta que
+	\[
+	hB_r(g) = B_r(hg).
+	\]
+	En particular observemos que si $hg \notin B_{2r}(g)$ debe ser que
+	\[
+	B_r(hg) \cap B_r(g) = \emptyset.
+	\]
+	De esta manera obtuvimos que
+	\[
+	|\{ h \in H: hB_r(g) \cap B_r(g) = \emptyset \}| \le |B_{2r}(g)| < \infty,
+	\]
+	concluyendo que la acción de $H$ en $G$ es propia. Con esto terminamos de ver que la acción es geométrica por lo que usando Svarć-Milnor resulta que $H$ es finitamente generado y que la inclusión
+	\[
+	H \xhookrightarrow{\iota} G
+	\]
+	es una quasi-isometría como queríamos ver.
+\end{proof}
+\bigskip
+\begin{tcolorbox}[colback=teal!25!white,colframe=teal!75!black]
+	\begin{ej}[Práctica 1 - ejercicio 16]
+		Sea $\phi : \Gamma_1 \to \Gamma_2$ morfismo entre grupos finitamente generados. Probar que 
+		\begin{itemize}
+			\item [a)] Si $\phi$ es un embedding quasi-isométrico entonces $\ker \phi$ es finito.
+			\item [b)] $\phi$ es quasi-isometría si y solo si $\ker \phi$ y $\coker$ son finitos.
+		\end{itemize}
+	\end{ej}
+\end{tcolorbox}
+
+\begin{sol}
+	Fijemos un conjuntos de generadores $S$ de $\Gamma_1$.
+	
+	\begin{itemize}
+		\item [a)] Si suponemos que $\phi$ es un embedding quasi-isométrico, es decir que su imagen no necesariamente es quasi densa, veamos que $\ker \phi$ es finito. Por definición de embedding quasi isométrico tenemos que existen constantes $\epsilon, \lambda \in \RR$ tales que para $g \in \ker \phi$,
+		\[
+		\lambda^{-1} d(\phi(g), \phi(1)) - \epsilon \le d(g,1)  \le \lambda d(\phi(g), \phi(1)) + \epsilon
+		\]
+		dado que $g \in \ker \phi$ resulta que $\phi(g)=1$, por lo que esta desigualdad nos dice que
+		\[
+		d(g,1) \le \epsilon.
+		\]
+		Dado que el grupo $\Gamma_1$ está finitamente generado esto nos dice por el resultado \ref{fgsiipropio} que solo existen finitos $g \in \ker \phi$. Con esto concluimos que $\ker \phi$ es finito.
+		
+		\item [b)] Probemos primero que si $\phi$ es una quasi-isometría resulta que $\ker \phi$ y $\coker$ son finitos. Por lo visto en el ítem anterior nos quedaría ver que en este caso $\coker$ es finito. Esto quiere decir que existen finitas coclases
+		\[
+		|\coker| =  |\{h \ker \phi, \hspace{0.2cm} h \in \Gamma_2\}| < \infty.
+		\]
+		Dado que la imagen de $\phi$ es quasi densa en $\Gamma_2$ debe ser que existe una constante $R$ tal que para todo $h \in \Gamma_2$
+		\[
+		d(\im, h ) < R.
+		\]
+		Reutilizando el lema \ref{fgsiipropio} obtenemos que la cantidad de coclases debe ser finita. Esto nos dice que $\coker$ es finito.
+		
+		\medskip
+		
+		Veamos ahora la recíproca. En este caso supongamos que $\ker \phi$ y $\coker$ son finitos y debemos verificar que $\phi$ es una quasi-isometría. Lo primero que vamos a ver es que la corestricción de $\phi$ a su imagen es una quasi-isometría. Esto se debe a que la imagen de $\phi$ es quasi-isométrica con $\Gamma_2$ por el lema \ref{coro-svarc-milnor} ya que tiene índice finito y $\Gamma_2$ es un grupo finitamente presentado. De una manera más formal lo que vimos es que la función
+		\[
+		\iota_{\im}: \im \to \Gamma_2
+		\]
+		es una quasi-isometría.
+		
+		\medskip
+		
+		El problema se reduce entonces a ver que 
+		\[
+		\phi^{\im}: \Gamma_1 \to \im
+		\]
+		es una quasi-isometría. Dado que la composición de quasi-isometrías es una quasi-isometría veríamos que
+		\[
+		\phi = \iota_{\im} \circ \phi^{\im} 
+		\]
+		es una quasi-isometría. De este lema obtenemos que el subgrupo $\im$ es finitamente generado, por lo tanto consideremos un conjunto de generadores $T$.
+		
+		\medskip
+		
+		Para ver que la función $\phi$ corestringida es una quasi-isometría debemos ver que es un embedding quasi-isométrico y que su imagen es quasi-densa. Al ser sobreyectiva solo debemos encargarnos de ver que es un embedding quasi-isométrico. Para eso debemos encontrar constantes $\lambda, \epsilon$ tales que para $g, g' \in \Gamma_1$ valga que
+		\begin{equation}\label{ec-qi}
+		\lambda^{-1} d(\phi(g), \phi(g')) - \epsilon \le d(g,g') \le \lambda d(\phi(g), \phi(g') + \epsilon.
+		\end{equation}
+		Dado un elemento $t$ del conjunto de generadores $T$, consideremos algún elemento en su preimagen que denotaremos $g_t$.
+		Afirmamos que las siguientes elecciones de constantes cumplen lo pedido. Por un lado
+		\[
+		\epsilon = \max \{ d(1,g) : g \in \ker \phi \}
+		\]
+		y por otro lado tomemos
+		\[
+		\lambda = \max \{  d(1,g_t): t \in T \}
+		\]
+		donde las distancias son las respectivas a los finitos generadores de los grupos. Veamos que se satisface la ecuación \ref{ec-qi}. Por un lado sabemos que si
+		\[
+		d(\phi(g),\phi(g')) = n
+		\]
+		luego por definición de la distancia
+		\[
+		\phi(g) = \phi(g') t_1 \dots {t_n}
+		\]
+		para $t_i \in T$. Dado que $\phi$ es un morfismo de grupos resulta que
+		\[
+		\ol g \coloneqq g^{-1}g' (g_{t_1} \dots g_{t_n})^{-1} \in \ker \phi
+		\]
+		por lo que reacomodando nos queda la siguiente escritura,
+		\[
+		g' = g \ol g (g_{t_1} \dots g_{t_n})^{-1}.
+		\]
+		De manera que cada elemento $g_{t_i}$ tiene su distancia acotada por $\lambda$ y como hay exactamente $n$ de estos, resulta que usando las cotas elegidas,
+		\[
+		d(g',g) \le \lambda n + \epsilon 
+		\]
+		como queríamos ver.
+	\end{itemize}
+	
+	
+	\qed
+\end{sol}
+
+\line(1,0){500}
+
+\bigskip
+
+
+\begin{lema}\label{grafo-metrico}
+	Dado un grafo $X$, si para todos los vértices $v$ existe una constante $\delta_v > 0$ tal que
+	\[
+	\lambda(e) > \delta_v
+	\]
+	para toda arista $e$ incidente en $v$ luego resulta que $X$ es métrico. 
+\end{lema}
+
+\begin{proof}
+	Para ver que es un espacio métrico debemos chequear que $d$ se trata de una métrica. Para eso veamos que
+	\[
+	d(x,y)=0 \iff x=y.
+	\]
+	Sean dos puntos $x,y$ tales que $d(x,y)=0$. Veamos dependiendo de qué tipos de puntos son que $x=y.$
+	
+	Si ambos puntos no son vértices del grafo a la vez resulta que están sobre la misma arista caso contrario la distancia no podría ser 0. En este caso como las aristas son isométricas con intervalos de $\RR$ debe ser que $x=y.$
+	
+	En el caso que ambos sean vértices si utilizamos la hipótesis del enunciado debe ser que
+	\[
+	d(x,y) > \delta_x > 0.
+	\]
+	Esto nos dice que no pueden tener distancia nula en tal caso.
+\end{proof}
+
+\begin{tcolorbox}[colback=teal!25!white,colframe=teal!75!black]
+	\begin{ej}[Práctica 6 - ejercicio]
+		Un grafo con shapes finitos $X$ es métrico, completo y geodésico.
+	\end{ej}
+\end{tcolorbox}
+
+\begin{sol}
+	
+	Para ver que es métrico como $\{ \lambda(e_n) \}_n$ es finito por hipótesis, si usamos el lema \ref{grafo-metrico} obtenemos que el espacio $X$ es métrico.
+	
+	\medskip
+	
+	Es geodésico cuando existe una geodésica que une dos puntos cualesquiera en el grafo. Dado que es un espacio de longitud, la distancia entre dos puntos $x,y$ se mide como
+	\[
+	d(x,y) = \inf \{ l(c) : c(0)=x, c(1)=y \}
+	\]
+	donde $c$ es una curva formada por aristas del grafo, que une a ambos puntos. Como el grafo tiene shapes finitas, resulta que si considero las curvas sin backtracking (que tienen mayor longitud) me quedo con finitas longitudes de curvas que unen a ambos puntos. En particular el ínfimo resulta ser un mínimo \footnote{Esto no quiere decir que sea únicamente geodésico porque si bien tiene shapes finitos puede haber infinitas aristas.}. Esto nos dice que existe una curva $c$ que minimiza la longitud. Esta curva resulta ser una geodésica, por lo tanto el grafo resulta ser geodésico.
+	
+	\medskip
+	
+	Para finalizar debemos ver que se trata de un espacio completo. Sea una sucesión de Cauchy $(x_n)_n$ debemos ver que converge a $x \in X$. Al ser una sucesión de Cauchy podemos tomar $\delta$ tal que
+	\[
+	\delta < \min \{ e \in \mathcal E | \lambda(e)/4 \}.
+	\]
+	El mínimo existe por que tiene shapes finitos. En tal caso existe $n_0$ tal que para todo $n,m > n_0$ vale que 
+	\[
+	d(x_n, x_m) \le \delta
+	\] 
+	por ser una sucesión de Cauchy. Por la distancia elegida debe haber un único vértice $w$ que diste menos de $\delta$ a la sucesión. En el caso que la sucesión tenga infinitos términos en una arista, al ser ésta compacta tiene una subsucesión convergente y por lo tanto $x_n$ es convergente. En el caso que no aparezca infinitas veces en una arista va a converger al vértice porque sino caso contrario existe $\epsilon$ tal que
+	\[
+	d(x_n, w) > \epsilon
+	\]
+	para todo $n \le n_0$. Como solo existe un vértice $w$ a distancia menor que $\delta$ y podemos tomar $\epsilon < \delta$, debe ser que $x_n$ cae dentro de una arista y por el argumento anterior tiene una subsucesión convergente y por lo tanto $x_n$ converge. 
+	Si no existiese tal vértice tendría que la sucesión cae dentro de una arista que es completa por ser isométrica con un intervalo en $\RR$.
+	
+	
+	\qed
+\end{sol}
+
+
+
+
+	
+\end{document}
